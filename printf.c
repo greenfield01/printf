@@ -50,25 +50,24 @@ int _printf(const char *format, ...)
 			count++;
 		}
 		if (!format[i])
-		{
 			return (count);
-			f = specifiers(&format[i + 1]);
+		f = specifiers(&format[i + 1]);
 
-			if (f != NULL)
-			{
-				count += f(valist);
-				i += 2;
-				continue;
-			}
-			if (!format[i + 1])
-				return (-1);
-			_putchar(format[i]);
-			count++;
-			if (format[i + 1] == '%')
-				i += 2;
-			else
-				i++;
+		if (f != NULL)
+		{
+			count += f(valist);
+			i += 2;
+			continue;
 		}
-		va_end(valist);
-		return (count);
+		if (!format[i + 1])
+			return (-1);
+		_putchar(format[i]);
+		count++;
+		if (format[i + 1] == '%')
+			i += 2;
+		else
+			i++;
 	}
+	va_end(valist);
+	return (count);
+}	
